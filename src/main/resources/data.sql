@@ -1,0 +1,11 @@
+insert into book(name,publish_date,author,image_url,price) values ("American Revolution","2017-05-06","Kyaw Kyaw","https://picsum.photos/400/?image=50",2000);
+insert into book(name,publish_date,author,image_url,price) values ("Ma Thein Shin Si poh Pyy Pr","2018-05-20","Naing Win Swe","https://picsum.photos/400/?image=51",3500);
+insert into book(name,publish_date,author,image_url,price) values ("Ma Huu Yar Myit Tar","2021-11-09","Naing Win Swe","https://picsum.photos/400/?image=52",6400);
+insert into book(name,publish_date,author,image_url,price) values ("Moe Nya Eain Mat Myuu","2021-11-09","Uni. Phone Naing","https://picsum.photos/400/?image=53",5000);
+insert into book(name,publish_date,author,image_url,price) values ("Myit Tar","2021-11-09","Ma Ma Lay","https://picsum.photos/400/?image=54",1500);
+insert into book(name,publish_date,author,image_url,price) values ("Cindrella","2021-11-09","Disney","https://picsum.photos/400/?image=55",7000);
+insert into book(name,publish_date,author,image_url,price) values ("A Hare and A Tortoise","2021-11-09","Wise Brother","https://picsum.photos/400/?image=56",4500);
+insert into book(name,publish_date,author,image_url,price) values ("Harry Portter","2021-11-09","J.K.Rowling","https://picsum.photos/400/?image=57",9000);
+insert into book(name,publish_date,author,image_url,price) values ("Percy Jackson","2021-11-09","Thomas Shelvi","https://picsum.photos/400/?image=58",1400);
+insert into book(name,publish_date,author,image_url,price) values ("Java Basic","2021-11-09","Soe Bala","https://picsum.photos/400/?image=59",8000);
+insert into book(name,publish_date,author,image_url,price) values ("Angular 2 and TypeScript","2021-11-09","Sayar Kyaw","https://picsum.photos/400/?image=60",20000);

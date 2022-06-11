@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<body>
+<table th:fragment="bookTable" class="table bg-white shadow-lg" id="bookTable">
+    <thead>
+    <tr>
+        <th></th>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Author</th>
+        <th>Publish Date</th>
+        <th>Price</th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="book : ${books}">
+        <td><i class="fas fa-book-open"></i></td>
+        <td th:text="${book.id}"></td>
+        <td th:text="${book.name}"></td>
+        <td th:text="${book.author}"></td>
+        <td th:text="${book.publishDate}"></td>
+        <td th:text="${book.price}"></td>
+        <td>
+            <a href="#" class="btn btn-outline-dark shadow-sm" th:href="@{'/admin/book/update?bookId='+${book.id}}">Edit</a>
+            <a href="#" class="btn btn-danger shadow-sm" th:href="@{'/admin/book/remove?bookId='+${book.id}}">Delete</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>

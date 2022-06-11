@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" th:replace="~{layout/userLayout :: userView(~{::main})}" xmlns:th="http://www.thymeleaf.org">
+<body>
+    <main role="main">
+        <div th:replace="fragments/user-mainpage-header.html :: userMainPageHeader"></div>
+            <div class="row">
+                <div class="col-md-2">
+                    <div th:replace="fragments/sider.html :: categorySideBar"></div>
+                </div>
+                <div class="col-md-8">
+                    <div class="container">
+                        <div th:replace="fragments/search-bar.html :: searchBar"></div>
+                    </div>
+                    <div th:replace="fragments/homePage.html :: home"></div>
+                </div>
+                <div class="col-md-2">
+                    <div th:replace="fragments/ads.html :: ads"></div>
+                </div>
+            </div>
+    </main>
+</body>
+</html>

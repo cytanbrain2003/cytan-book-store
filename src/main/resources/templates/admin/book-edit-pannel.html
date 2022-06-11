@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" th:replace="~{layout/adminLayout :: adminView(~{::main})}" xmlns:th="http://www.thymeleaf.org">
+
+<body>
+
+<main role="main" id="bookTableBg">
+    <div class="container pt-2" >
+
+        <div class="row">
+            <div class="col-md-10"></div>
+            <div class="col-md-2">
+                <a href="#" class="btn btn-success btn-round mt-3 mb-3" th:href="@{/admin/book/add}"><i class="fas fa-plus fa-2x"></i></a>
+            </div>
+        </div>
+
+        <div th:replace="fragments/book-table.html :: bookTable"></div>
+
+    </div>
+
+</main>
+
+</body>
+</html>

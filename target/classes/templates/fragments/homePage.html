@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<body>
+
+    <div class="container" th:fragment="home" >
+        <div class="row mt-4">
+            <div class="col-md-4 mb-3" th:each="book:${books}">
+                <div th:if="${book}">
+                    <div class="card shadow card-size" id="cardStyle">
+                        <div class="card-body">
+                            <img class="img-fluid" th:src="${book.imageUrl}">
+                            <h2 class="card-title" th:text="${book.name}"></h2>
+                            <p></p><i class="fas fa-user"></i><span> </span><span class="card-text" th:text="${book.author}"></span></p>
+                        </div>
+                        <div class="card-footer">
+                            <a href="#" class="btn btn-outline-dark" th:href="@{'/book/details?bookId=' + ${book.id}}">Details</a>
+
+                            <a sec:authorize="isAuthenticated()" href="#" class="btn btn-success" th:href="@{'/book/cart/add?bookId='+${book.id}}">Add To Cart</a>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</body>
+</html>

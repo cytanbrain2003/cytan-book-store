@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" th:replace="~{layout/userLayout :: userView(~{::main})}" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<body>
+    <main role="main">
+
+        <i><h1 class="text-center my-5 pt-3"><span class="h1" th:text="${user}"></span>'s Bookshelf</h1></u></i>
+
+        <div class="text-muted text-center" th:if="${reply}">
+            <p th:text="${reply}"></p>
+        </div>
+
+        <div class="row">
+            <div class="col-md-2">
+                <div th:replace="fragments/ads.html :: ads"></div>
+            </div>
+            <div class="col-md-8">
+                <div th:replace="fragments/bought-books.html :: bookShelf"></div>
+            </div>
+            <div class="col-md-2">
+                <div th:replace="fragments/ads.html :: ads"></div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" th:replace="~{layout/userLayout :: userView(~{::main})}" xmlns:th="http://www.thymeleaf.org">
+
+<body>
+<main role="main">
+    <div th:replace="fragments/user-mainpage-header.html :: userMainPageHeader"></div>
+    <div class="row mt-3">
+        <div class="col-md-10">
+            <div th:replace="fragments/book-details.html :: bookDetails"></div>
+        </div>
+        <div class="col-md-2">
+            <div class="container">
+                <div th:replace="fragments/sider.html :: similarBooksSideBar"></div>
+            </div>
+        </div>
+
+    </div>
+</main>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<body>
+<div class="container" th:fragment="updateForm">
+    <form th:action="@{'/admin/book/update?bookId='+${bookId}}" method="post" th:object="${book}">
+    <div class="container">
+        <div class="form-group">
+            <label for="name">Book Name</label>
+            <input type="text" th:value="${book.name}" id="name" class="form-control shadow-lg" th:field="*{name}"
+                   th:classappend="${#fields.hasErrors('name')} ? 'is-invalid'">
+            <small class="invalid-feedback" th:errors="*{name}"></small>
+        </div>
+        <div class="form-group">
+            <label for="author">Author</label>
+            <input type="text" th:value="${book.author}" id="author" class="form-control shadow-lg" th:field="*{author}"
+                   th:classappend="${#fields.hasErrors('author')} ? 'is-invalid'">
+            <small class="invalid-feedback" th:errors="*{author}"></small>
+        </div>
+        <div class="form-group">
+            <label for="publishDate">Publish Date</label>
+            <input type="text" th:value="${book.publishDate}" id="publishDate" class="form-control shadow-lg" th:field="*{publishDate}"
+                   th:classappend="${#fields.hasErrors('publishDate')} ? 'is-invalid'">
+            <small class="invalid-feedback" th:errors="*{publishDate}"></small>
+        </div>
+        <div class="form-group">
+            <label for="imageUrl">Image Url</label>
+            <input type="text" th:value="${book.imageUrl}" id="imageUrl" class="form-control shadow-lg" th:field="*{imageUrl}"
+                   th:classappend="${#fields.hasErrors('imageUrl')} ? 'is-invalid'">
+            <small class="invalid-feedback" th:errors="*{imageUrl}"></small>
+        </div>
+        <div class="form-group">
+            <label for="price">Price</label>
+            <input type="text" th:value="${book.price}" id="price" class="form-control shadow-lg" th:field="*{price}"
+                   th:classappend="${#fields.hasErrors('price')} ? 'is-invalid'">
+            <small class="invalid-feedback" th:errors="*{price}"></small>
+        </div>
+        <input type="submit" class="btn btn-success shadow-lg btn-block" value="Update">
+    </div>
+    </form>
+</div>
+</body>
+</html>

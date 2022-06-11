@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" th:replace="~{layout/userLayout :: userView(~{::main})}" xmlns:th="http://www.thymeleaf.org">
+
+<body>
+<main role="main">
+    <div class="row">
+
+            <div class="col-md-7">
+                <div class="container ml-5 pl-5">
+                    <div th:replace="fragments/cart-table.html :: cartTable"></div>
+                    <a href="#" class="btn btn-danger btn-block text-white" th:href="@{/book/cart/clear-all}"><i class="fas fa-trash-alt"></i> Clear All</a>
+                    <a href="#" class="btn btn-outline-dark btn-block" th:href="@{/book}"><i class="fas fa-reply"></i> Back</a>
+                    <a href="#" class="btn btn-success btn-block" th:href="@{/user/cart/checkout}"><i class="fas fa-shopping-bag"></i> Buy Now</a>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div th:replace="fragments/cart-item-info.html :: cartItemInfo"></div>
+            </div>
+
+        <div class="col-md-2">
+            <div th:replace="fragments/ads.html :: ads"></div>
+        </div>
+    </div>
+</main>
+</body>
+</html>
