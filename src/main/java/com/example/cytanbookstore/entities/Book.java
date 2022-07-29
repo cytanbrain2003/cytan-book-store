@@ -22,14 +22,23 @@ public class Book extends IdClass{
     private String imageUrl;
     private double price;
 
+    @ManyToMany
+    private List<Genre> genreList;
+
     public Book() {
     }
 
-    public Book(String name, String publishDate, String author, String imageUrl, double price) {
+    public Book(String name, String publishDate, String author, String imageUrl, double price, List<Genre> genreList) {
         this.name = name;
         this.publishDate = publishDate;
         this.author = author;
         this.imageUrl = imageUrl;
         this.price = price;
+        this.genreList = genreList;
+    }
+
+    public void setGenre(Genre genre){
+        genre.getBookList().add(this);
+        genreList.add(genre);
     }
 }

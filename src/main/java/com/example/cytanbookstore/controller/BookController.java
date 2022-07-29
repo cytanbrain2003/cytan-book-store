@@ -64,52 +64,28 @@ public class BookController {
         }
     }
 
-    @PostMapping("/book/search")
-    public String search(@RequestParam("search") String name, Model model){
-        if(bookService.searchedBooks(name)==null){
-            model.addAttribute("reply","* No Book Found *");
-        }
-        model.addAttribute("books",bookService.searchedBooks(name));
-        return "user/all-books";
+    @PostMapping("/cart/add")
+    public ResponseEntity<List<BookDto>> addToCart(@RequestBody BookDto bookDto){
+        System.out.println("Cart Add");
+        cartService.addBookToCart(bookDto);
+        return ResponseEntity.status(HttpStatus.OK).body(cartService.allBooksInCart());
     }
 
-    @GetMapping("/book/details")
-    public String detail(@RequestParam("bookId")int id, Model model){
-        model.addAttribute("cartSize",cartService.cartSize());
-        model.addAttribute("book",bookService.findBook(id));
-
-        return "user/detail-book";
-    }
-
-    @GetMapping("/book/cart/add")
-    public String addToCart(@RequestParam("bookId")int id,Model model){
-        cartService.addBookToCart(bookService.findBook(id));
-        model.addAttribute("cartSize",cartService.cartSize());
-        return "redirect:/book/details?bookId="+id;
-    }
-
-    @GetMapping("/book/cart")
-    public String cartView(Model model){
+    @GetMapping("/cart")
+    public ResponseEntity<List<BookDto>> cartView(Model model){
         List<BookDto> cartedBooks = cartService.allBooksInCart();
-        if (cartedBooks.isEmpty()){
-            model.addAttribute("returnStatement","This Cart Is Empty!");
-        }else {
-            model.addAttribute("returnStatement","Total items - "+cartService.cartSize());
-        }
-        model.addAttribute("cartedBooks",cartedBooks);
-        model.addAttribute("cartSize",cartService.cartSize());
-        return "user/cart-view";
+        return ResponseEntity.status(HttpStatus.OK).body(cartedBooks);
     }
 
-    @GetMapping("/book/cart/clear-all")
-    public String clearCart(){
+    @GetMapping("/cart/clear-all")
+    public ResponseEntity<Integer> clearCart(){
         cartService.clearCart();
-        return "redirect:/book/cart";
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).body(cartService.cartSize());
     }
 
-    @GetMapping("/book/cart/remove")
-    public String removeFromCart(@RequestParam("bookId")int id,Model model){
-        cartService.removeFromCart(bookService.findBook(id));
+    @GetMapping("/cart/remove")
+    public String removeFromCart(@RequestBody BookDto bookDto){
+        cartService.removeFromCart(bookDto);
         return "redirect:/book/cart";
     }
     @GetMapping("/book/cart/info")

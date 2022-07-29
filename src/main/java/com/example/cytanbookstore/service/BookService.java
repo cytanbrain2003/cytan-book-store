@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -46,6 +47,7 @@ public class BookService {
 
     @Transactional
     public Book addBook(BookDto bookDto){
+        Book book = toEntity(bookDto);
         return bookDao.save(toEntity(bookDto));
     }
 
@@ -67,7 +69,8 @@ public class BookService {
                 book.getPublishDate(),
                 book.getAuthor(),
                 book.getImageUrl(),
-                book.getPrice());
+                book.getPrice(),
+                book.getGenreList());
     }
 
     private Book toEntity(BookDto bookDto){
@@ -76,7 +79,24 @@ public class BookService {
                 bookDto.getPublishDate(),
                 bookDto.getAuthor(),
                 bookDto.getImageUrl(),
-                bookDto.getPrice());
+                bookDto.getPrice(),
+                bookDto.getGenreList());
+    }
+
+    public List<Book> changeDtoListToBookList(List<BookDto> bookDtoList){
+        List<Book> checkOutBookList = new ArrayList<>();
+        for (BookDto bookDto : bookDtoList){
+            checkOutBookList.add(bookDao.getById(bookDto.getId()));
+        }
+        return checkOutBookList;
+    }
+
+    public List<BookDto> changeBookListToDtoList(List<Book> bookList){
+        List<BookDto> bookDtoList = new ArrayList<>();
+        for (Book book : bookList){
+            bookDtoList.add(toDto(book));
+        }
+        return bookDtoList;
     }
 
 }

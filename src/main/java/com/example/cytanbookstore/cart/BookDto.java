@@ -1,14 +1,15 @@
 package com.example.cytanbookstore.cart;
 
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
+import com.example.cytanbookstore.entities.Genre;
+import lombok.*;
+
+import java.util.List;
 
 @Getter
 @Setter
 @EqualsAndHashCode
 @AllArgsConstructor
+@ToString
 public class BookDto {
 
     private Integer id;
@@ -17,5 +18,6 @@ public class BookDto {
     private String author;
     private String imageUrl;
     private double price;
+    private List<Genre> genreList;
 
 }

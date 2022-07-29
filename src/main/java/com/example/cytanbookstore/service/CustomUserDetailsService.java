@@ -23,7 +23,7 @@ import java.util.Optional;
 import static com.example.cytanbookstore.entities.Role.*;
 
 @Service
-public class CustomUserDetailsService implements UserDetailsService {
+public class CustomUserDetailsService{
 
     @Autowired
     private UserDao userDao;
@@ -37,25 +37,24 @@ public class CustomUserDetailsService implements UserDetailsService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Optional<User> users = userDao.findByUsername(username);
-        if (!users.isPresent()){
-            throw new UsernameNotFoundException("UserName is not exist");
-        }
-        return users.get();
+    @Autowired
+    private BookService bookService;
+
+    public User loadUserByUsername(String username){
+        return userDao.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException("Username Not found"));
     }
+
 
     @Transactional
     public User register(User user){
-        user.setRole(ROLE_PREFIX+USER);
+
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         return userDao.save(user);
     }
 
     @Transactional
     public void checkOut(User user, List<BookDto> bookList){
-        List<Book> checkOutBookList = changeDtoToBook(bookList);
+        List<Book> checkOutBookList = bookService.changeDtoListToBookList(bookList);
         UserBook userBook = new UserBook();
         userBook.setUser(userDao.save(user));
         for (Book book : checkOutBookList){
@@ -64,16 +63,13 @@ public class CustomUserDetailsService implements UserDetailsService {
         userBookDao.save(userBook);
     }
 
-    private List<Book> changeDtoToBook(List<BookDto> bookDtoList){
-        List<Book> checkOutBookList = new ArrayList<>();
-        for (BookDto bookDto : bookDtoList){
-            checkOutBookList.add(bookDao.getById(bookDto.getId()));
-        }
-        return checkOutBookList;
+    @Transactional
+    public User findByUsername(String username){
+        return userDao.findByUsername(username).orElse(null);
     }
 
     @Transactional
-    public List<Book> getBookByUserId(int id){
+    public List<BookDto> getBookByUserId(int id){
         //List<List<Book>> userBookBookList = new ArrayList<>();
         /*List<Integer> mybooksId = new ArrayList<>();
         List<UserBook> userBookList = userBookDao.findUserBookByUserId(id);
@@ -87,6 +83,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 
          */
         List<Book> mybooks = userBookDao.findUserBookByUserId(id);
-        return mybooks;
+        return bookService.changeBookListToDtoList(mybooks);
     }
+
 }

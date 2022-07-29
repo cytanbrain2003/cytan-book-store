@@ -17,7 +17,7 @@ import java.util.stream.Stream;
 @Getter
 @Setter
 @ToString
-public class User extends IdClass implements UserDetails {
+public class User extends IdClass {
 
     @Column(unique = true)
     private String username;
@@ -27,43 +27,8 @@ public class User extends IdClass implements UserDetails {
     private String name;
     private String address;
 
-    private String role;
-
-    @Override
-    public String getPassword() {
-        return password;
-    }
-
-    @Override
-    public String getUsername() {
-        return username;
-    }
-
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Stream.of(role).map(r -> new SimpleGrantedAuthority(r))
-                .collect(Collectors.toList());
-    }
-
-    @Override
-    public boolean isAccountNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        return true;
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return true;
-    }
+    @Enumerated(EnumType.STRING)
+    private Role role;
 
 
 }

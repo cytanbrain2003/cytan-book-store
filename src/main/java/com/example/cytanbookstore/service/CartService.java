@@ -21,9 +21,9 @@ public class CartService {
     @Autowired
     private UserDao userDao;
 
-    public void addBookToCart(Book book){
+    public void addBookToCart(BookDto bookDto){
 
-        bookCart.addBook(book);
+        bookCart.addBook(bookDto);
     }
 
     public int cartSize(){
@@ -38,8 +38,8 @@ public class CartService {
         bookCart.clearAll();
     }
 
-    public void removeFromCart(Book book){
-        bookCart.removeBookDto(book);
+    public void removeFromCart(BookDto bookDto){
+        bookCart.removeBookDto(bookDto);
     }
 
 }

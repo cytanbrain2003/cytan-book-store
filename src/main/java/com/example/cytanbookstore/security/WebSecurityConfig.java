@@ -1,6 +1,7 @@
 package com.example.cytanbookstore.security;
 
 import com.example.cytanbookstore.service.CustomUserDetailsService;
+import com.example.cytanbookstore.service.UserDetailServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -16,16 +17,20 @@ import static com.example.cytanbookstore.entities.Role.*;
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    private CustomUserDetailsService userDetailsService;
+    private UserDetailServiceImpl userDetailsService;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.csrf().disable();
+        http.httpBasic();
+        http.cors().and().csrf().disable();
         http.authorizeRequests()
-                .anyRequest().permitAll();
+                .anyRequest().permitAll()
+                .and()
+                .formLogin()
+                .permitAll();
                /* .authorizeRequests()
                 .mvcMatchers("/","/home","/book/**","/register").permitAll()
                 .mvcMatchers("/css/**").permitAll()
@@ -44,10 +49,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll();*/
     }
 
-//    @Override
-//    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-//        auth.userDetailsService(userDetailsService)
-//                .passwordEncoder(passwordEncoder);
-//    }
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.userDetailsService(userDetailsService)
+                .passwordEncoder(passwordEncoder);
+    }
 
 }
